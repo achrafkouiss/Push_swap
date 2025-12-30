@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/24 16:40:40 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/30 08:39:23 by akouiss          ###   ########.fr       */
+/*   Created: 2025/12/26 10:04:12 by akouiss           #+#    #+#             */
+/*   Updated: 2025/12/30 07:18:53 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int ft_atoi(char *str, int *bool)
+void ft_putchar(char c)
 {
-    long nbr;
-    long sign;
+    write(2, &c, 1);
+}
+
+void ft_putstr(char *str)
+{
     size_t i;
 
     i = 0;
-    nbr = 0;
-    sign = 1;
-    if (str[i] == '-' || str[i] == '+')
-    {
-        if (str[i] == '-')
-            sign = -1;
-        i++;
-    }
     while (str[i])
     {
-        nbr = (nbr * 10) + (str[i] - '0');
-        if (((nbr * sign) < -2147483648) || ((nbr * sign) > 2147483647))
-        {
-            *bool = 1;
-            return (0);
-        }
-        i++;
+        ft_putchar(str[i]);
+        i++;   
     }
-    return (nbr * sign);
 }

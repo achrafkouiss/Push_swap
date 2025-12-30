@@ -6,7 +6,7 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 10:19:36 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/26 08:42:27 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/30 11:03:58 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,17 @@ void *ft_free_list(t_list *head)
     }
     return (NULL);
 }
+
+// void *ft_free_list(t_list *head)
+// {
+//     t_list *tmp;
+
+//     while (head)
+//     {
+//         tmp = head->next;
+//         free(head->content); // must free content first
+//         free(head);
+//         head = tmp;
+//     }
+//     return (NULL);
+// }

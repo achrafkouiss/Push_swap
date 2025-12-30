@@ -6,7 +6,7 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 17:07:25 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/26 09:08:35 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/30 07:53:31 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_list *lsnew(void *content)
     if (!str && content)
         return (NULL);
     node->content = str;
+    node->pos = -1;
     node->next = NULL;
     return (node);
 }

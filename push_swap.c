@@ -5,109 +5,135 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/23 16:08:04 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/26 09:09:58 by akouiss          ###   ########.fr       */
+/*   Created: 2025/12/26 09:23:43 by akouiss           #+#    #+#             */
+/*   Updated: 2025/12/30 11:05:28 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// max min in toi is not handled
 #include "push_swap.h"
 
-t_list *split_to_list(int argc, char *argv[])
+size_t lstsize(t_list *lst)
 {
-    int i;
-    int z;
-    char **arr;
-    t_list *node;
-    t_list *head;
+    size_t index;
 
-    i = 1;
-    head = NULL;
-    while (i < argc && argv)
+    index = 0;
+    while (lst)
     {
-        z = 0;
-        arr = ft_split(argv[i++], 0);
-        if (!arr)
-            return (ft_free_array(arr), ft_free_list(head));
-        while (arr[z])
-        {
-            node = lsnew(arr[z++]);
-            if (!node)
-                return (ft_free_array(arr), ft_free_list(head));
-            if (lstaddback(&head, node))
-                return(ft_free_array(arr), ft_free_list(head), ft_free_list(node));
-        }
-        ft_free_array(arr);
+        lst = lst->next;
+        index++;
     }
-    return (head);
+    return (index);
 }
 
-int check_content(char *str)
-{
-    int i;
-
-    i = 0;
-    if ((str[i] >= '0' && str[i] <= '9') || str[i] == '+' || str[i] == '-')
-        i++;
-    else
-        return (0);
-    if (str[i] == '+' || str[i] == '-')
-        return (0);
-    if ((str[i - 1] == '+' || str[i - 1] == '-') && !str[i])
-        return (0);
-    while (str[i])
-    {
-        if (!(str[i] >= '0' && str[i] <= '9'))
-            return (0);
-        i++;
-    }
-    return (1);
-}
-
-int  check_list(t_list *head, int (*ft)(char *))
+void    ft_fisr_sort(t_list **stack_a, t_list **stack_b, size_t len, int chank, size_t index)
 {
     t_list *current;
 
-    if (!head || !ft)
-        return (0);
-    current = head;
-    while (current)
+    current = *stack_a;
+    while (index < len)
     {
-        if (!ft(current->content))
-            return (0);
-        current = current->next;
+        if (current->pos <= index + chank)
+        {
+            ft_push(stack_a, stack_b);
+            if (index <= current->pos)
+                write(1, "pb\n", 3);
+            else 
+            {
+                ft_rotate(stack_b);
+                write(1, "pb\n", 3);
+                write(1, "rb\n", 3);
+            }
+            index++;
+        }
+        else
+        {
+                ft_rotate(stack_a);
+                write(1, "ra\n", 3);
+        }
+        current = *stack_a;
     }
-    return (1);
 }
 
-t_list *parsing(int argc, char *argv[])
+size_t   ft_index_max(t_list *lst)
 {
-    t_list *head;
-    int bool;
-
-    head = split_to_list(argc, argv);
-    bool = check_list(head, check_content);
-    if (!bool)
+    size_t i;
+    size_t index;
+    ssize_t nbr;
+    
+    index = 0;
+    i = 0;
+    nbr = lst->pos;
+    lst = lst->next;
+    while (lst)
     {
-        ft_free_list(head);
-        return (NULL);
+        if (nbr < lst->pos)
+        {
+            index =  i + 1;
+            nbr = lst->pos;
+        }
+        lst = lst->next;
+        i++;
     }
-    if (!lstcheck(head, ft_atoi))
-    {
-        ft_free_list(head);
-        return (NULL);
-    }
-    ft_free_list(head);
-    return (head);
+    return (index);
 }
+
+void    ft_final_swap(t_list **stack_a, t_list **stack_b, size_t len,  size_t index)
+{
+    if (!stack_b || !*stack_b)
+		return ;
+    len = lstsize(*stack_b);
+    index = ft_index_max(*stack_b);
+    if (index <= len / 2)
+    {
+        while (index > 0)
+        {
+            ft_rotate(stack_b);
+            write(1, "rb\n", 3);
+            index--;
+        }
+    }
+    else
+    {
+        while (index < len)
+        {
+            ft_reverse_rotate(stack_b);
+            write(1, "rrb\n", 4);
+            index++;
+        }     
+    }
+    ft_push(stack_b, stack_a);
+    write(1, "pa\n", 3);
+}
+
+t_list *push_swap(int argc, char *argv[])
+{
+    t_list *stack_a;
+    t_list *stack_b;
+    size_t len;
+    int chank;
+
+    if (len <= 100)
+        chank = 11;
+    else
+        chank = 25;
+    stack_b = NULL;
+    stack_a = parsing(argc, argv);
+    if (!stack_a)
+    {
+        ft_putstr("error");
+        return (NULL);
+    }
+    len = lstsize(stack_a);
+    ft_pos_list(stack_a, 0, 0, len);
+    ft_fisr_sort(&stack_a, &stack_b, len, chank, 0);
+    while (stack_b)
+        ft_final_swap(&stack_a, &stack_b, 0, 0);
+    ft_free_list(stack_a);
+    return (stack_b);
+} 
 
 int main(int argc, char *argv[])
 {
-    if (argc < 2)
-        return (0);
-    if (!parsing(argc, argv))
-        printf("not working");
-    else
-    {
-        printf("working");
-    }
+    push_swap(argc, argv);
 }
