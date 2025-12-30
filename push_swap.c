@@ -6,11 +6,10 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 09:23:43 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/30 11:05:28 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/30 21:14:28 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// max min in toi is not handled
 #include "push_swap.h"
 
 size_t lstsize(t_list *lst)
@@ -30,27 +29,33 @@ void    ft_fisr_sort(t_list **stack_a, t_list **stack_b, size_t len, int chank, 
 {
     t_list *current;
 
+    if (len <= 100)
+        chank = 13;
+    else
+        chank = 32;
     current = *stack_a;
     while (index < len)
     {
         if (current->pos <= index + chank)
         {
-            ft_push(stack_a, stack_b);
+            // ft_push(stack_a, stack_b);
             if (index <= current->pos)
-                write(1, "pb\n", 3);
+            {
+                // printf("xxxxxxxxxxxxxxxxxxx\n");
+                pb(stack_a, stack_b);
+                printf("xxxxxxxxxxxxxxxxxxx\n");
+
+            }
             else 
             {
-                ft_rotate(stack_b);
-                write(1, "pb\n", 3);
-                write(1, "rb\n", 3);
+                printf("xxxxxxxxxxxxxxxxxxx\n");
+                pb(stack_a, stack_b);
+                rb(stack_b);
             }
             index++;
         }
         else
-        {
-                ft_rotate(stack_a);
-                write(1, "ra\n", 3);
-        }
+            ra(stack_a);
         current = *stack_a;
     }
 }
@@ -88,8 +93,7 @@ void    ft_final_swap(t_list **stack_a, t_list **stack_b, size_t len,  size_t in
     {
         while (index > 0)
         {
-            ft_rotate(stack_b);
-            write(1, "rb\n", 3);
+            rb(stack_b);
             index--;
         }
     }
@@ -97,14 +101,27 @@ void    ft_final_swap(t_list **stack_a, t_list **stack_b, size_t len,  size_t in
     {
         while (index < len)
         {
-            ft_reverse_rotate(stack_b);
-            write(1, "rrb\n", 4);
+            rrb(stack_b);
             index++;
         }     
     }
-    ft_push(stack_b, stack_a);
-    write(1, "pa\n", 3);
+    pb(stack_b, stack_a);
 }
+
+// int ft_is_listordered(t_list *lst)
+// {
+//     size_t i;
+
+//     i = 0;
+//     while (lst)
+//     {
+//         if (lst->pos != i)
+//             return (1);
+//         lst = lst->next;
+//         i++;
+//     }
+//     return (0);
+// }
 
 t_list *push_swap(int argc, char *argv[])
 {
@@ -113,22 +130,21 @@ t_list *push_swap(int argc, char *argv[])
     size_t len;
     int chank;
 
-    if (len <= 100)
-        chank = 11;
-    else
-        chank = 25;
     stack_b = NULL;
     stack_a = parsing(argc, argv);
     if (!stack_a)
     {
-        ft_putstr("error");
+        ft_putstr("error\n");
         return (NULL);
     }
     len = lstsize(stack_a);
     ft_pos_list(stack_a, 0, 0, len);
+    // if (!ft_is_listordered(stack_a))
+    //     return (ft_free_list(stack_a));
     ft_fisr_sort(&stack_a, &stack_b, len, chank, 0);
     while (stack_b)
-        ft_final_swap(&stack_a, &stack_b, 0, 0);
+            ft_final_swap(&stack_a, &stack_b, 0, 0);
+    ft_free_list(stack_b);
     ft_free_list(stack_a);
     return (stack_b);
 } 

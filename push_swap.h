@@ -6,7 +6,7 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 16:26:13 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/30 09:37:06 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/30 21:02:37 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,18 @@ void ft_pos_list(t_list *lst, size_t index, size_t i, size_t len);
 //swap functions
 void    ft_swap(t_list **head);
 void    ft_push(t_list **lst1, t_list **lst2);
-void ft_rotate(t_list **head);
-void ft_reverse_rotate(t_list **head);
+
+void pa(t_list **lst1, t_list **lst2);
+void pb(t_list **lst1, t_list **lst2);
+
+void ra(t_list **lst);
+void rb(t_list **lst);
+
+void rra(t_list **lst);
+void rrb(t_list **lst);
+
+// void ft_reverse_rotate(t_list **head);
+// void ft_rotate(t_list **head);
 
 
 #endif
