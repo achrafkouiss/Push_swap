@@ -6,7 +6,7 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 16:26:13 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/30 21:02:37 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/31 10:03:56 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_list
     struct s_list *next; // need to know why i cannot put t_list *next
 }   t_list;
 
-t_list *push_swap(int argc, char *argv[]);
+void *push_swap(int argc, char *argv[]);
 // void push_swap(int argc, char *argv[]);
 size_t lstsize(t_list *lst);
 

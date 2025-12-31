@@ -6,7 +6,7 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 09:23:43 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/30 21:14:28 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/31 10:18:13 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void    ft_fisr_sort(t_list **stack_a, t_list **stack_b, size_t len, int chank, 
     t_list *current;
 
     if (len <= 100)
-        chank = 13;
+        chank = 3;
     else
         chank = 32;
     current = *stack_a;
@@ -40,15 +40,9 @@ void    ft_fisr_sort(t_list **stack_a, t_list **stack_b, size_t len, int chank, 
         {
             // ft_push(stack_a, stack_b);
             if (index <= current->pos)
-            {
-                // printf("xxxxxxxxxxxxxxxxxxx\n");
                 pb(stack_a, stack_b);
-                printf("xxxxxxxxxxxxxxxxxxx\n");
-
-            }
             else 
             {
-                printf("xxxxxxxxxxxxxxxxxxx\n");
                 pb(stack_a, stack_b);
                 rb(stack_b);
             }
@@ -105,25 +99,36 @@ void    ft_final_swap(t_list **stack_a, t_list **stack_b, size_t len,  size_t in
             index++;
         }     
     }
-    pb(stack_b, stack_a);
+    pa(stack_b, stack_a);
 }
 
-// int ft_is_listordered(t_list *lst)
-// {
-//     size_t i;
+int ft_is_listordered(t_list *lst)
+{
+    size_t i;
 
-//     i = 0;
-//     while (lst)
-//     {
-//         if (lst->pos != i)
-//             return (1);
-//         lst = lst->next;
-//         i++;
-//     }
-//     return (0);
+    i = 0;
+    while (lst)
+    {
+        if (lst->pos != i)
+            return (1);
+        lst = lst->next;
+        i++;
+    }
+    return (0);
+}
+// void *sort_two(t_list **stack_a)
+// {
+//     t_list *next;
+
+//     next = (*stack_a)->next;
+//     if ((*stack_a)->pos < (*next)->pos)
+// }
+// void *sort_small(t_list **stack_a, t_list **stack_b, size_t len)
+// {
+    
 // }
 
-t_list *push_swap(int argc, char *argv[])
+void    *push_swap(int argc, char *argv[])
 {
     t_list *stack_a;
     t_list *stack_b;
@@ -139,14 +144,16 @@ t_list *push_swap(int argc, char *argv[])
     }
     len = lstsize(stack_a);
     ft_pos_list(stack_a, 0, 0, len);
-    // if (!ft_is_listordered(stack_a))
-    //     return (ft_free_list(stack_a));
+    if (!ft_is_listordered(stack_a))
+        return (ft_free_list(stack_a));
+    // if (len <= 5)
+    //     return (ft_sort_small());
+    printf("len = %ld\n", len);
     ft_fisr_sort(&stack_a, &stack_b, len, chank, 0);
     while (stack_b)
             ft_final_swap(&stack_a, &stack_b, 0, 0);
     ft_free_list(stack_b);
     ft_free_list(stack_a);
-    return (stack_b);
 } 
 
 int main(int argc, char *argv[])
