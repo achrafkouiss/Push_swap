@@ -4,7 +4,9 @@ CC = cc -g
 
 CFILES = push_swap.c ft_split.c ft_atoi.c \
 lsnew.c lstaddback.c lstcheck.c ft_free.c \
-display.c parsing.c swap_functions.c pos.c \
+display.c parsing.c pos.c ft_reverse_rotate.c\
+ft_rotate.c sort_small.c ft_utils.c ft_push.c\
+ft_swap.c \
 
 
 all: $(NAME)

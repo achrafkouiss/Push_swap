@@ -6,13 +6,24 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 16:08:04 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/30 10:29:26 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/31 18:27:49 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list *split_to_list(int argc, char *argv[])
+void *ft_free_all(char **arr, t_list *lst1, t_list *node)
+{
+    if (arr)
+        ft_free_array(arr);
+    if (lst1)
+        ft_free_list(lst1);
+    if (node)
+        ft_free_list(node);
+    return (NULL);
+}
+
+static t_list *split_to_list(int argc, char *argv[])
 {
     int i;
     int z;
@@ -27,21 +38,21 @@ t_list *split_to_list(int argc, char *argv[])
         z = 0;
         arr = ft_split(argv[i++], 0);
         if (!arr)
-            return (ft_free_array(arr), ft_free_list(head));
+            return(ft_free_all(arr, head, NULL));
         while (arr[z])
         {
             node = lsnew(arr[z++]);
             if (!node)
-                return (ft_free_array(arr), ft_free_list(head));
+                return(ft_free_all(arr, head, NULL));
             if (lstaddback(&head, node))
-                return(ft_free_array(arr), ft_free_list(head), ft_free_list(node));
+                return(ft_free_all(arr, head, node));
         }
         ft_free_array(arr);
     }
     return (head);
 }
 
-int check_content(char *str)
+static int check_content(char *str)
 {
     int i;
 
@@ -63,7 +74,7 @@ int check_content(char *str)
     return (1);
 }
 
-int  check_list(t_list *head, int (*ft)(char *))
+static int  check_list(t_list *head, int (*ft)(char *))
 {
     t_list *current;
 

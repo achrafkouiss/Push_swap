@@ -6,15 +6,15 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 17:05:34 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/30 11:04:24 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/31 18:52:10 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int check_repeat(t_list *head, int nbr,size_t index)
+int check_repeat(t_list *head, int nbr,ssize_t index)
 {
-    size_t i;
+    ssize_t i;
     t_list *current;
 
     i = 0;
@@ -29,11 +29,11 @@ int check_repeat(t_list *head, int nbr,size_t index)
     return (1);
 }
 
-void *ft_copy_mem(void *dest, void *src, size_t count)
+void *ft_copy_mem(void *dest, void *src, ssize_t count)
 {
     unsigned char *s;
     unsigned char *s2;
-    size_t i;
+    ssize_t i;
 
     if (!dest || !src)
         return (NULL);
@@ -61,20 +61,10 @@ int *allo_nbr(int nbr)
     return (n);
 }
 
-// int *allo_nbr(int nbr)
-// {
-//     int *n = malloc(sizeof(int));
-//     if (!n)
-//         return NULL;
-//     *n = nbr;
-//     return n;
-// }
-
-
 int lstcheck(t_list *head, int (*ft)(char *, int *))
 {
     t_list *current;
-    size_t index;
+    ssize_t index;
     int nbr;
     int bool;
 
@@ -99,30 +89,3 @@ int lstcheck(t_list *head, int (*ft)(char *, int *))
     }
     return (1);
 }
-
-// int lstcheck(t_list *head, int (*ft)(char *, int *))
-// {
-//     t_list *current = head;
-//     size_t index = 0;
-//     int nbr;
-//     int bool;
-
-//     while (current)
-//     {
-//         nbr = ft(current->content, &bool);
-//         if (bool)
-//             return (0);
-//         if (!check_repeat(head, nbr, index))
-//             return (0);
-//         free(current->content);
-//         current->content = allo_nbr(nbr);
-//         if (!current->content)
-//         {
-//             ft_free_list(head);
-//             return (0);
-//         }
-//         index++;
-//         current = current->next;
-//     }
-//     return (1);
-// }

@@ -6,16 +6,18 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 17:07:25 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/30 07:53:31 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/31 18:55:49 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t ft_strlen(char *str)
+ssize_t ft_strlen(char *str)
 {
-    size_t i;
+    ssize_t i;
 
+    if (!str)
+        return (-1);
     i = 0;
     while (str[i])
         i++;
@@ -25,8 +27,8 @@ size_t ft_strlen(char *str)
 char *ft_strdup(char *str)
 {
     char *s;
-    size_t len;
-    size_t i;
+    ssize_t len;
+    ssize_t i;
     
     if (!str)
         return (NULL);
