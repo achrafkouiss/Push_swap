@@ -6,7 +6,7 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 17:07:25 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/31 18:55:49 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/31 20:56:49 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ t_list *lsnew(void *content)
         return (NULL);
     str = ft_strdup(content);
     if (!str && content)
+    {
+        free(node);
         return (NULL);
+    }
     node->content = str;
     node->pos = -1;
     node->next = NULL;

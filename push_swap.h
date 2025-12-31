@@ -6,7 +6,7 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 16:26:13 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/31 18:53:16 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/31 21:25:58 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ ssize_t lstsize(t_list *lst);
 char **ft_split(char *str, int i);
 t_list *lsnew(void *content);
 int    lstaddback(t_list **head, t_list *node);
-int lstcheck(t_list *head, int (*ft)(char *, int *));
-int ft_atoi(char *str, int *bool);
+int lstcheck(t_list *head, int (*ft)(char *));
+int ft_atoi(char *str);
 
 void *ft_free_array(char **arr);
 void *ft_free_list(t_list *head);

@@ -6,7 +6,7 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 09:23:43 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/31 18:52:49 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/31 20:44:16 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void    ft_fisr_sort(t_list **stack_a, t_list **stack_b, ssize_t len, ssi
 {
     int chank;
 
+    if (!stack_a || !*stack_a)
+    return ;
     if (len <= 100)
         chank = 13;
     else
@@ -89,6 +91,7 @@ void    *push_swap(int argc, char *argv[])
             ft_final_swap(&stack_a, &stack_b, 0, 0);
     ft_free_list(stack_b);
     ft_free_list(stack_a);
+    return (NULL);
 } 
 
 int main(int argc, char *argv[])

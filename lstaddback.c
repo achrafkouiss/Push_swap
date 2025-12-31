@@ -6,7 +6,7 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 17:09:01 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/26 09:09:20 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/31 20:53:55 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int    lstaddback(t_list **head, t_list *node)
 {
     t_list *current;
 
-    if (!head | !node)
+    if (!head || !node)
         return (1);
     if (!*head)
     {

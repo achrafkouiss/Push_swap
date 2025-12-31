@@ -6,7 +6,7 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 16:08:04 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/31 18:27:49 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/31 20:47:22 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_list *split_to_list(int argc, char *argv[])
 
     i = 1;
     head = NULL;
-    while (i < argc && argv)
+    while (i < argc)
     {
         z = 0;
         arr = ft_split(argv[i++], 0);
@@ -56,6 +56,8 @@ static int check_content(char *str)
 {
     int i;
 
+    if (!str)
+        return (0);
     i = 0;
     if ((str[i] >= '0' && str[i] <= '9') || str[i] == '+' || str[i] == '-')
         i++;

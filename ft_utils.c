@@ -6,7 +6,7 @@
 /*   By: akouiss <akouiss@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:35:37 by akouiss           #+#    #+#             */
-/*   Updated: 2025/12/31 18:51:12 by akouiss          ###   ########.fr       */
+/*   Updated: 2025/12/31 21:18:41 by akouiss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ ssize_t   ft_index_max(t_list *lst)
     ssize_t i;
     ssize_t index;
     ssize_t nbr;
-    
+   
+    if (!lst)
+        return (-1);
     index = 0;
     i = 0;
     nbr = lst->pos;
@@ -69,6 +71,8 @@ void    ft_swap_max(t_list **stack_a, t_list **stack_b, ssize_t len,  ssize_t in
 		return ;
     len = lstsize(*stack_b);
     index = ft_index_max(*stack_b);
+    if (index == -1)
+        return ;
     if (index <= len / 2)
     {
         while (index > 0)
